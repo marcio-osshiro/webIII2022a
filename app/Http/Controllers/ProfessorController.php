@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class ProfessorController extends Controller
 {
@@ -11,6 +13,10 @@ class ProfessorController extends Controller
       // faz o que tem que fazer
       // obtem dados
       // manda para visão renderizar
-      return view('listagemProfessor');
+      $professores = DB::table('professor')
+        ->where('nome', 'like', '%ano%')
+        ->get();
+      return view('listagemProfessor',
+      ['professores'=> $professores]);
     }
 }
