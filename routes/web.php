@@ -13,8 +13,10 @@ use App\Http\Controllers\ProfessorController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+ Route::get('/', function () {
+     return view('welcome');
+ });
 
 Route::get('/professor/lista', [ProfessorController::class, 'lista']);
+Route::get('/professor/novo', [ProfessorController::class, 'novo']);
+Route::post('/professor/salvar', [ProfessorController::class, 'salvar']);
