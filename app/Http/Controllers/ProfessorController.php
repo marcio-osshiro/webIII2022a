@@ -27,6 +27,5 @@ class ProfessorController extends Controller
       $professor->area_id = $request->input('area_id');
       $professor->save();
       return redirect('professor/lista');
-
     }
 }

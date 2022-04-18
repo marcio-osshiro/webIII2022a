@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfessorController;
+use App\Http\Controllers\CategoriaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +21,8 @@ use App\Http\Controllers\ProfessorController;
 Route::get('/professor/lista', [ProfessorController::class, 'lista']);
 Route::get('/professor/novo', [ProfessorController::class, 'novo']);
 Route::post('/professor/salvar', [ProfessorController::class, 'salvar']);
+
+Route::get('/categoria/lista',[CategoriaController::class, 'lista']);
+Route::get('/categoria/novo', [CategoriaController::class, 'novo']);
+Route::post('/categoria/salvar', [CategoriaController::class, 'salvar']);
+Route::get('/categoria/editar/{id}',[CategoriaController::class, 'editar']);
