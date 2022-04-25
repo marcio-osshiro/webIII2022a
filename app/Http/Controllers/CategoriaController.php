@@ -10,13 +10,14 @@ class CategoriaController extends Controller
 {
     function lista() {
       $categorias = DB::table('categoria')->get();
-      return view('listagemCategoria', ['categorias'=> $categorias]);
+      return view('listagemCategoria',  compact('categorias'),
+    );
     }
     function novo() {
       $categoria = new Categoria();
       $categoria->id = 0;
       $categoria->descricao = "";
-      return view('formularioCategoria', ['categoria'=> $categoria]);
+      return view('formularioCategoria', compact('categoria'));
     }
 
     function salvar(Request $request) {
@@ -35,11 +36,18 @@ class CategoriaController extends Controller
 
     function editar($id) {
       $categoria = Categoria::find($id);
-      return view('formularioCategoria', ['categoria'=> $categoria]);
+      return view('formularioCategoria', compact('categoria'));
     }
 
     function excluir($id) {
+      $categoria = Categoria::find($id);
+      $categoria->delete();
+      return redirect('categoria/lista');
 
+    }
+
+    function url() {
+      var_dump(url('categoria/salvar'));
     }
 
 }

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\NoticiaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,11 +19,20 @@ use App\Http\Controllers\CategoriaController;
      return view('welcome');
  });
 
-Route::get('/professor/lista', [ProfessorController::class, 'lista']);
-Route::get('/professor/novo', [ProfessorController::class, 'novo']);
-Route::post('/professor/salvar', [ProfessorController::class, 'salvar']);
+// Route::get('/professor/lista', [ProfessorController::class, 'lista']);
+// Route::get('/professor/novo', [ProfessorController::class, 'novo']);
+// Route::post('/professor/salvar', [ProfessorController::class, 'salvar']);
 
 Route::get('/categoria/lista',[CategoriaController::class, 'lista']);
 Route::get('/categoria/novo', [CategoriaController::class, 'novo']);
 Route::post('/categoria/salvar', [CategoriaController::class, 'salvar']);
 Route::get('/categoria/editar/{id}',[CategoriaController::class, 'editar']);
+Route::get('/categoria/excluir/{id}',[CategoriaController::class, 'excluir']);
+
+Route::get('/categoria/url', [CategoriaController::class, 'url']);
+
+Route::get('/noticia/lista',[NoticiaController::class, 'lista']);
+Route::get('/noticia/novo', [NoticiaController::class, 'novo']);
+Route::post('/noticia/salvar', [NoticiaController::class, 'salvar']);
+Route::get('/noticia/editar/{id}',[NoticiaController::class, 'editar']);
+Route::get('/noticia/excluir/{id}',[NoticiaController::class, 'excluir']);

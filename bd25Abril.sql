@@ -5,7 +5,7 @@
 -- Dumped from database version 11.10 (Debian 11.10-1.pgdg100+1)
 -- Dumped by pg_dump version 13.1 (Debian 13.1-1.pgdg100+1)
 
--- Started on 2022-04-18 11:45:26 -04
+-- Started on 2022-04-25 11:47:07 -04
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -50,7 +50,7 @@ CREATE SEQUENCE public.area_id_seq
 ALTER TABLE public.area_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2941 (class 0 OID 0)
+-- TOC entry 2953 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: area_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -88,12 +88,54 @@ CREATE SEQUENCE public.categoria_id_seq
 ALTER TABLE public.categoria_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2942 (class 0 OID 0)
+-- TOC entry 2954 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: categoria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.categoria_id_seq OWNED BY public.categoria.id;
+
+
+--
+-- TOC entry 205 (class 1259 OID 20718)
+-- Name: noticia; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.noticia (
+    id integer NOT NULL,
+    titulo character varying(100),
+    descricao character varying(1000),
+    data date,
+    autor character varying(100),
+    categoria_id integer
+);
+
+
+ALTER TABLE public.noticia OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 20716)
+-- Name: noticia_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.noticia_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.noticia_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2955 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: noticia_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.noticia_id_seq OWNED BY public.noticia.id;
 
 
 --
@@ -129,7 +171,7 @@ CREATE SEQUENCE public.professor_id_seq
 ALTER TABLE public.professor_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2943 (class 0 OID 0)
+-- TOC entry 2956 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: professor_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -169,7 +211,7 @@ CREATE SEQUENCE public.usuario_id_seq
 ALTER TABLE public.usuario_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2944 (class 0 OID 0)
+-- TOC entry 2957 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: usuario_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -178,7 +220,7 @@ ALTER SEQUENCE public.usuario_id_seq OWNED BY public.usuario.id;
 
 
 --
--- TOC entry 2794 (class 2604 OID 20049)
+-- TOC entry 2801 (class 2604 OID 20049)
 -- Name: area id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -186,7 +228,7 @@ ALTER TABLE ONLY public.area ALTER COLUMN id SET DEFAULT nextval('public.area_id
 
 
 --
--- TOC entry 2796 (class 2604 OID 20633)
+-- TOC entry 2803 (class 2604 OID 20633)
 -- Name: categoria id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -194,7 +236,15 @@ ALTER TABLE ONLY public.categoria ALTER COLUMN id SET DEFAULT nextval('public.ca
 
 
 --
--- TOC entry 2793 (class 2604 OID 19998)
+-- TOC entry 2804 (class 2604 OID 20721)
+-- Name: noticia id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.noticia ALTER COLUMN id SET DEFAULT nextval('public.noticia_id_seq'::regclass);
+
+
+--
+-- TOC entry 2800 (class 2604 OID 19998)
 -- Name: professor id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -202,7 +252,7 @@ ALTER TABLE ONLY public.professor ALTER COLUMN id SET DEFAULT nextval('public.pr
 
 
 --
--- TOC entry 2795 (class 2604 OID 20062)
+-- TOC entry 2802 (class 2604 OID 20062)
 -- Name: usuario id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -210,7 +260,7 @@ ALTER TABLE ONLY public.usuario ALTER COLUMN id SET DEFAULT nextval('public.usua
 
 
 --
--- TOC entry 2931 (class 0 OID 20046)
+-- TOC entry 2941 (class 0 OID 20046)
 -- Dependencies: 199
 -- Data for Name: area; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -224,7 +274,7 @@ INSERT INTO public.area VALUES (2, 'Banco de Dados');
 
 
 --
--- TOC entry 2935 (class 0 OID 20630)
+-- TOC entry 2945 (class 0 OID 20630)
 -- Dependencies: 203
 -- Data for Name: categoria; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -233,10 +283,20 @@ INSERT INTO public.categoria VALUES (1, 'Atualidade');
 INSERT INTO public.categoria VALUES (2, 'Tecnologia');
 INSERT INTO public.categoria VALUES (3, 'Lazer');
 INSERT INTO public.categoria VALUES (4, 'Esporte');
+INSERT INTO public.categoria VALUES (5, 'categoria2304');
 
 
 --
--- TOC entry 2929 (class 0 OID 19995)
+-- TOC entry 2947 (class 0 OID 20718)
+-- Dependencies: 205
+-- Data for Name: noticia; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.noticia VALUES (1, 'Carnaval em Abril', 'Este ano, o carnaval no Brasil foi comemorado em abril, devido ao período de quarentena adotado', '2022-04-25', 'globo news', 1);
+
+
+--
+-- TOC entry 2939 (class 0 OID 19995)
 -- Dependencies: 197
 -- Data for Name: professor; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -254,7 +314,7 @@ INSERT INTO public.professor VALUES (24, 'pro1', 'pro1@gmail.com', '1111-9999', 
 
 
 --
--- TOC entry 2933 (class 0 OID 20059)
+-- TOC entry 2943 (class 0 OID 20059)
 -- Dependencies: 201
 -- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -263,7 +323,7 @@ INSERT INTO public.usuario VALUES (1, 'admin@gmail.com', '827ccb0eea8a706c4c34a1
 
 
 --
--- TOC entry 2945 (class 0 OID 0)
+-- TOC entry 2958 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: area_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -272,16 +332,25 @@ SELECT pg_catalog.setval('public.area_id_seq', 10, true);
 
 
 --
--- TOC entry 2946 (class 0 OID 0)
+-- TOC entry 2959 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: categoria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.categoria_id_seq', 4, true);
+SELECT pg_catalog.setval('public.categoria_id_seq', 6, true);
 
 
 --
--- TOC entry 2947 (class 0 OID 0)
+-- TOC entry 2960 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: noticia_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.noticia_id_seq', 2, true);
+
+
+--
+-- TOC entry 2961 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: professor_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -290,7 +359,7 @@ SELECT pg_catalog.setval('public.professor_id_seq', 24, true);
 
 
 --
--- TOC entry 2948 (class 0 OID 0)
+-- TOC entry 2962 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: usuario_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -299,7 +368,7 @@ SELECT pg_catalog.setval('public.usuario_id_seq', 1, true);
 
 
 --
--- TOC entry 2800 (class 2606 OID 20051)
+-- TOC entry 2808 (class 2606 OID 20051)
 -- Name: area area_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -308,7 +377,7 @@ ALTER TABLE ONLY public.area
 
 
 --
--- TOC entry 2806 (class 2606 OID 20635)
+-- TOC entry 2814 (class 2606 OID 20635)
 -- Name: categoria categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -317,7 +386,7 @@ ALTER TABLE ONLY public.categoria
 
 
 --
--- TOC entry 2802 (class 2606 OID 20066)
+-- TOC entry 2810 (class 2606 OID 20066)
 -- Name: usuario ind_usuario_email; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -326,7 +395,16 @@ ALTER TABLE ONLY public.usuario
 
 
 --
--- TOC entry 2798 (class 2606 OID 20000)
+-- TOC entry 2816 (class 2606 OID 20726)
+-- Name: noticia noticia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.noticia
+    ADD CONSTRAINT noticia_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2806 (class 2606 OID 20000)
 -- Name: professor professor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -335,7 +413,7 @@ ALTER TABLE ONLY public.professor
 
 
 --
--- TOC entry 2804 (class 2606 OID 20064)
+-- TOC entry 2812 (class 2606 OID 20064)
 -- Name: usuario usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -343,7 +421,7 @@ ALTER TABLE ONLY public.usuario
     ADD CONSTRAINT usuario_pkey PRIMARY KEY (id);
 
 
--- Completed on 2022-04-18 11:45:26 -04
+-- Completed on 2022-04-25 11:47:08 -04
 
 --
 -- PostgreSQL database dump complete
