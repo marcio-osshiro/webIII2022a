@@ -11,13 +11,13 @@ class NoticiaController extends Controller
     //
     function lista() {
       $noticias = DB::table('noticia')->get();
-      return view('listagemNoticia', compact('noticias'));
+      return view('noticia.listagem', compact('noticias'));
     }
 
     function novo() {
       $noticia = new Noticia();
       $noticia->id = 0;
-      return view('formularioNoticia', compact('noticia'));
+      return view('noticia.formulario', compact('noticia'));
     }
 
     function salvar(Request $request) {
@@ -39,7 +39,7 @@ class NoticiaController extends Controller
 
     function editar($id) {
       $noticia = Noticia::find($id);
-      return view('formularioNoticia', compact('noticia'));
+      return view('noticia.formulario', compact('noticia'));
     }
 
     function excluir($id) {
