@@ -12,21 +12,16 @@
       </tr>
     </thead>
     <tbody>
-      <?php
-        foreach ($categorias as $categoria) {
-          echo "
+      @foreach($categorias as $categoria)
           <tr>
-            <td scope='row'>$categoria->id</td>
-            <td>$categoria->descricao</td>
+            <td scope='row'>{{$categoria->id}}</td>
+            <td>{{$categoria->descricao}}</td>
             <td>
-              <a href='editar/$categoria->id' class='btn btn-primary'>+</a>
-              <a href='excluir/$categoria->id' class='btn btn-danger'>-</a>
+              <a href='editar/{{$categoria->id}}' class='btn btn-primary'>+</a>
+              <a href='excluir/{{$categoria->id}}' class='btn btn-danger'>-</a>
             </td>
           </tr>
-          ";
-
-        }
-       ?>
+        @endforeach
     </tbody>
   </table>
-@endsection  
+@endsection

@@ -5,19 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Noticia;
+use App\Models\Categoria;
+
 
 class NoticiaController extends Controller
 {
     //
     function lista() {
-      $noticias = DB::table('noticia')->get();
+      $noticias = Noticia::all();
       return view('noticia.listagem', compact('noticias'));
     }
 
     function novo() {
       $noticia = new Noticia();
       $noticia->id = 0;
-      return view('noticia.formulario', compact('noticia'));
+      $noticia->data = now();
+      $categorias = Categoria::all();
+      return view('noticia.formulario', compact('noticia', 'categorias'));
     }
 
     function salvar(Request $request) {
@@ -34,19 +38,18 @@ class NoticiaController extends Controller
       $noticia->categoria_id = $request->input('categoria_id');
       $noticia->save();
       return redirect('noticia/lista');
-
     }
 
     function editar($id) {
       $noticia = Noticia::find($id);
-      return view('noticia.formulario', compact('noticia'));
+      $categorias = Categoria::all();
+      return view('noticia.formulario', compact('noticia', 'categorias'));
     }
 
     function excluir($id) {
       $noticia = Noticia::find($id);
       $noticia->delete();
       return redirect('noticia/lista');
-
     }
 
 }

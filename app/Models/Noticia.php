@@ -11,7 +11,7 @@ class Noticia extends Model
     use HasFactory;
     protected $table = 'noticia';
     public $timestamps = false;
-    protected $dates = ['data'];
+    protected $casts = ['data'=>'datetime:d/m/Y'];
 
     public function categoria()
     {

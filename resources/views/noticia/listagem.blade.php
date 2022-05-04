@@ -19,9 +19,9 @@
       <tr>
         <td scope='row'>{{$noticia->id}}</td>
         <td>{{$noticia->titulo}}</td>
-        <td>{{$noticia->data}}</td>
+        <td>{{$noticia->data->format('d/m/Y')}}</td>
         <td>{{$noticia->autor}}</td>
-        <td>{{$noticia->categoria_id}}</td>
+        <td>{{$noticia->categoria->descricao}}</td>
         <td>
           <a href='editar/{{$noticia->id}}' class='btn btn-primary'>+</a>
           <a href='excluir/{{$noticia->id}}' class='btn btn-danger'>-</a>
