@@ -31,6 +31,13 @@ class NoticiaController extends Controller
       } else {
         $noticia = Noticia::find($id);
       }
+      $noticia->imagem = $request->input('imagem');
+      if ($request->hasFile('arquivo')) {
+        $path = $request->arquivo->store('public/imagens');
+        $path = explode('/', $path);
+        $len = count($path);
+        $noticia->imagem = $path[$len-1];
+      }
       $noticia->titulo = $request->input('titulo');
       $noticia->descricao = $request->input('descricao');
       $noticia->data = $request->input('data');

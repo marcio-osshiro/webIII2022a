@@ -7,6 +7,7 @@
     <thead>
       <tr>
         <th scope="col">#</th>
+        <th></th>
         <th scope="col">Descrição</th>
         <th></th>
       </tr>
@@ -15,6 +16,11 @@
       @foreach($categorias as $categoria)
           <tr>
             <td scope='row'>{{$categoria->id}}</td>
+            <td>
+              @if($categoria->imagem != "")
+              <img src="/storage/imagens/{{$categoria->imagem}}" style="width: 40px">
+              @endif
+            </td>
             <td>{{$categoria->descricao}}</td>
             <td>
               <a href='editar/{{$categoria->id}}' class='btn btn-primary'>+</a>

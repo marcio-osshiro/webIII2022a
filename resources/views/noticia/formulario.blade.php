@@ -1,8 +1,13 @@
 @extends('template')
 
 @section('conteudo')
-  <form class="container" action="{{url('noticia/salvar')}}" method="post">
+  <form class="container" action="{{url('noticia/salvar')}}" method="post" enctype="multipart/form-data">
      @csrf
+     <input type="hidden" class="form-control" id="imagem" name="imagem" value="{{$noticia->imagem}}">
+     @if($noticia->imagem != "")
+     <img src="/storage/imagens/{{$noticia->imagem}}" style="width: 40px">
+     @endif
+
     <h1>Cadastro de Notícia</h1>
     <div class="form-group">
       <label for="Id">ID</label>
@@ -31,6 +36,10 @@
           <option value="{{$categoria->id}}" {{$categoria->id == $noticia->categoria_id?'selected':''}}>{{$categoria->descricao}}</option>
         @endforeach
       </select>
+    </div>
+    <div class="form-group">
+      <label for="arquivo">Imagem</label>
+      <input type="file" class="form-control" id="arquivo" name="arquivo">
     </div>
     <button type="submit" class="btn btn-primary">Gravar</button>
   </form>
