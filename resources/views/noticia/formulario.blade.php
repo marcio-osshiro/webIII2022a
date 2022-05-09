@@ -1,6 +1,16 @@
 @extends('template')
 
 @section('conteudo')
+  @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+  @endif
+
   <form class="container" action="{{url('noticia/salvar')}}" method="post" enctype="multipart/form-data">
      @csrf
      <input type="hidden" class="form-control" id="imagem" name="imagem" value="{{$noticia->imagem}}">
@@ -13,33 +23,53 @@
       <label for="Id">ID</label>
       <input readonly type="text" class="form-control" id="id" name="id" value="{{$noticia->id}}">
     </div>
+
+
+    <input id="title" type="text" name="title" class="@error('title') is-invalid @enderror">
+
+    @error('title')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+
     <div class="form-group">
       <label for="titulo">Título</label>
-      <input type="text" class="form-control" id="titulo" name="titulo" value="{{$noticia->titulo}}">
+      <input type="text" class="form-control @error('titulo') is-invalid @enderror" id="titulo" name="titulo" value="{{old('titulo', $noticia->titulo)}}">
+        @error('titulo')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
     </div>
     <div class="form-group">
       <label for="descricao">Descrição</label>
-  <input type="text" class="form-control" id="titulo" name="descricao" value="{{$noticia->descricao}}">
+  <input type="text" class="form-control" id="titulo" name="descricao" value="{{old('descricao', $noticia->descricao)}}">
     </div>
     <div class="form-group">
       <label for="data">Data</label>
-      <input type="date" class="form-control" id="data" name="data" value="{{$noticia->data->format('Y-m-d')}}">
+      <input type="date" class="form-control @error('data') is-invalid @enderror" id="data" name="data" value="{{old('data', $noticia->data->format('Y-m-d'))}}">
+      @error('data')
+          <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
     </div>
     <div class="form-group">
       <label for="autor">Autor</label>
-      <input type="text" class="form-control" id="autor" name="autor" value="{{$noticia->autor}}">
+      <input type="text" class="form-control" id="autor" name="autor" value="{{old('autor',$noticia->autor)}}">
     </div>
     <div class="form-group">
       <label for="categoria_id">Categoria</label>
-      <select class="form-select" name="categoria_id">
+      <select class="form-select @error('categoria_id') is-invalid @enderror" name="categoria_id">
         @foreach ($categorias as $categoria)
           <option value="{{$categoria->id}}" {{$categoria->id == $noticia->categoria_id?'selected':''}}>{{$categoria->descricao}}</option>
         @endforeach
       </select>
-    </div>
+      @error('categoria_id')
+          <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+</div>
     <div class="form-group">
       <label for="arquivo">Imagem</label>
-      <input type="file" class="form-control" id="arquivo" name="arquivo">
+      <input type="file" class="form-control @error('arquivo') is-invalid @enderror" id="arquivo" name="arquivo">
+        @error('arquivo')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
     </div>
     <button type="submit" class="btn btn-primary">Gravar</button>
   </form>
