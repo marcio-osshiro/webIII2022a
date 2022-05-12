@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Noticia;
 use App\Models\Categoria;
-
+use App\Http\Requests\NoticiaRequest;
 
 class NoticiaController extends Controller
 {
@@ -24,14 +24,37 @@ class NoticiaController extends Controller
       return view('noticia.formulario', compact('noticia', 'categorias'));
     }
 
-    function salvar(Request $request) {
+    function salvar(NoticiaRequest $request) {
+      $id = $request->input('id');
+      if ($id == 0) {
+        $noticia = new Noticia();
+      } else {
+        $noticia = Noticia::find($id);
+      }
+      $noticia->imagem = $request->input('imagem');
+      if ($request->hasFile('arquivo')) {
+        $path = $request->arquivo->store('public/imagens');
+        $path = explode('/', $path);
+        $len = count($path);
+        $noticia->imagem = $path[$len-1];
+      }
+      $noticia->titulo = $request->input('titulo');
+      $noticia->descricao = $request->input('descricao');
+      $noticia->data = $request->input('data');
+      $noticia->autor = $request->input('autor');
+      $noticia->categoria_id = $request->input('categoria_id');
+      $noticia->save();
+      return redirect('noticia/lista');
+    }
+
+    function salvarOld(Request $request) {
       $validator = Validator::make($request->all(), [
                   'titulo' => 'required|max:100',
                   'data' => 'required|date',
                   'categoria_id' => 'required|exists:categoria,id',
                   'arquivo' => 'image',
               ], [
-                'required' => 'O :attribute é requerido.',
+                'required' => 'O/A :attribute é requerido(a).',
                 'image' => 'Não é um arquivo de imagem',
                 'date' => 'Não é uma data válida',
                 'categoria_id.exists'=> 'Não foi encontrado na tabela categoria',

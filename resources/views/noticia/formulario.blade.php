@@ -25,12 +25,6 @@
     </div>
 
 
-    <input id="title" type="text" name="title" class="@error('title') is-invalid @enderror">
-
-    @error('title')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-
     <div class="form-group">
       <label for="titulo">Título</label>
       <input type="text" class="form-control @error('titulo') is-invalid @enderror" id="titulo" name="titulo" value="{{old('titulo', $noticia->titulo)}}">
