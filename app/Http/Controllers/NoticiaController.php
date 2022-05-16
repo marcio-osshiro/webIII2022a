@@ -10,6 +10,10 @@ use App\Http\Requests\NoticiaRequest;
 
 class NoticiaController extends Controller
 {
+  public function __construct(){
+          $this->middleware('auth');
+  }
+
     //
     function lista() {
       $noticias = Noticia::all();

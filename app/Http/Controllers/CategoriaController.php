@@ -8,6 +8,10 @@ use App\Models\Categoria;
 
 class CategoriaController extends Controller
 {
+  public function __construct(){
+          $this->middleware('auth');
+  }
+
     function lista() {
       $categorias = DB::table('categoria')->get();
       return view('categoria.listagem',  compact('categorias'),

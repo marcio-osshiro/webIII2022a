@@ -50,12 +50,22 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav me-auto mb-2 mb-md-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{url('noticia/lista')}}">Notícia</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{{url('categoria/lista')}}">Categoria</a>
-        </li>
+        @auth
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{url('noticia/lista')}}">Notícia</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{url('categoria/lista')}}">Categoria</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ route('logout') }}">Sair</a>
+          </li>
+        @else
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{ route('login') }}">Entrar</a>
+          </li>
+        @endauth
+
       </ul>
     </div>
   </div>

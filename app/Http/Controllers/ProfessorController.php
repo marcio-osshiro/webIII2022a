@@ -8,6 +8,10 @@ use App\Models\Professor;
 
 class ProfessorController extends Controller
 {
+  public function __construct(){
+          $this->middleware('auth');
+  }
+
     //
     function lista() {
       $professores = DB::select('SELECT professor.*, area.descricao as area_descricao FROM professor LEFT JOIN area ON area.id=professor.area_id ORDER BY professor.nome');
