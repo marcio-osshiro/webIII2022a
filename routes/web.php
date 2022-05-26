@@ -19,6 +19,7 @@ use App\Http\Controllers\IndexController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+Route::get('/categoria/relatorio',[CategoriaController::class, 'relatorio']);
 
 Route::get('/categoria/lista',[CategoriaController::class, 'lista']);
 Route::get('/categoria/novo', [CategoriaController::class, 'novo']);

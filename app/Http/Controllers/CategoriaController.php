@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Categoria;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class CategoriaController extends Controller
 {
@@ -12,8 +13,15 @@ class CategoriaController extends Controller
           $this->middleware('auth');
   }
 
+    function relatorio() {
+      $categorias = Categoria::all();
+      $pdf = PDF::loadView('categoria.relatorio', compact('categorias'));
+      return $pdf->download('categorias.pdf');
+      //return view('categoria.relatorio',  compact('categorias'));
+
+    }
     function lista() {
-      $categorias = DB::table('categoria')->get();
+      $categorias = Categoria::all();
       return view('categoria.listagem',  compact('categorias'),
     );
     }
@@ -25,8 +33,6 @@ class CategoriaController extends Controller
     }
 
     function salvar(Request $request) {
-
-
         $id = $request->input('id');
         if ($id == 0) {
           $categoria = new Categoria();
