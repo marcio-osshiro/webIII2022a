@@ -48,7 +48,10 @@ class CategoriaController extends Controller
         }
         $categoria->descricao = $request->input('descricao');
         $categoria->save();
-        return redirect('categoria/lista');
+        $mensagem = "Categoria $categoria->descricao foi salva";
+        return
+          redirect('categoria/lista')
+            ->with(compact('mensagem'));
     }
 
     function editar($id) {
@@ -58,8 +61,10 @@ class CategoriaController extends Controller
 
     function excluir($id) {
       $categoria = Categoria::find($id);
+      $mensagem = "Categoria $categoria->descricao foi excluída";
       $categoria->delete();
-      return redirect('categoria/lista');
+      return redirect('categoria/lista')
+        ->with(compact('mensagem'));
 
     }
 

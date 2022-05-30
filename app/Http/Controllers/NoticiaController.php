@@ -16,7 +16,7 @@ class NoticiaController extends Controller
 
     //
     function lista() {
-      $noticias = Noticia::all();
+      $noticias = Noticia::paginate(5);
       return view('noticia.listagem', compact('noticias'));
     }
 
