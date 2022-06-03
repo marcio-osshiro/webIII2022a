@@ -14,8 +14,8 @@ class NoticiaFactory extends Factory
      */
     public function definition()
     {
-      $caminho = storage_path('app/public/imagens');
-      $imagem = $this->faker->image($caminho, 640, 480, 'null', false, false);
+      $caminho = storage_path().'/app/public/imagens/';
+      $imagem = $this->faker->image($caminho, 640, 480, null, false, false);
       var_dump($imagem);
     	return [
               'titulo' => $this->faker->sentence,

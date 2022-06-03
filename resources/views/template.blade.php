@@ -58,6 +58,9 @@
             <a class="nav-link active" aria-current="page" href="{{url('categoria/lista')}}">Categoria</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{url('usuario/lista')}}">Usuario</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{{ route('logout') }}">Sair</a>
           </li>
         @else

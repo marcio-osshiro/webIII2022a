@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\UsuarioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -37,7 +38,11 @@ Route::get('/noticia/excluir/{id}',[NoticiaController::class, 'excluir']);
 
 Route::get('/', [IndexController::class, 'index']);
 
+Route::get('/usuario/lista',[UsuarioController::class, 'lista']);
 
+Route::get('/usuario/mensagem/{usuario_id}',[UsuarioController::class, 'mensagem']);
+
+Route::post('/usuario/send_mensagem', [UsuarioController::class, 'send_mensagem']);
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth'])->name('dashboard');
